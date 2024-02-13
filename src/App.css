@@ -111,6 +111,7 @@ Body {
 }
 
 button {
+  box-sizing: border-box;
   cursor: pointer;
   margin: 5px;
   padding: 6px;
@@ -129,6 +130,7 @@ button {
   font-size: 2em;
   color: bisque;
   text-shadow: 2px 2px 2px #2d262e;
+  white-space: nowrap;
   user-select: none;
   animation: buttonGlow 2s ease-in-out alternate infinite;
   transition: all ease-out 0.25s;
