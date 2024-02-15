@@ -193,6 +193,10 @@ button:active {
   }
 }
 
+/* SOLVED: the footer buttons were "shakey" 
+due to a combination of inner and outer glow and scale(1.1).
+Only affecting the 400x400 itch version??
+Solved by adding another border. */
 .isPlaying {
   background: #c3a7bc;
   background: linear-gradient(
@@ -200,6 +204,7 @@ button:active {
     rgb(150, 128, 145) 0%,
     rgb(190, 171, 195) 100%
   );
+  border: 1px solid black;
   color: #e6d9c4;
   text-shadow: 2px 2px 2px #634667;
   transform: scale(1.1);

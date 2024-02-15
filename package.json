@@ -1,6 +1,6 @@
 {
   "name": "ambient_project",
-  "version": "0.2.5",
+  "version": "0.2.7",
   "homepage": "https://mycatsname.github.io/ambient_project/",
   "private": true,
   "dependencies": {
