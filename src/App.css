@@ -18,6 +18,17 @@ Body {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
 }
 
+@property --a {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --b {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
 .App {
   width: 100%;
   height: 100vh;
@@ -28,21 +39,29 @@ Body {
     #eee 75%,
     #333 75%
   );
+  background: radial-gradient(
+    circle at 69%,
+    #634667,
+    #333 var(--a),
+    #eee var(--b),
+    #333 var(--b)
+  );
   position: relative;
   display: flex;
   flex-direction: column;
   text-align: center;
   z-index: 1;
-  animation: appIntro 8s ease-out;
+  animation: gradientIntro 8s ease-out forwards;
 }
-@keyframes appIntro {
+
+@keyframes gradientIntro {
   0% {
-    scale: 0;
-    opacity: 0.6;
+    --a: 0%;
+    --b: 0%;
   }
   100% {
-    scale: 1;
-    opacity: 1;
+    --a: 50%;
+    --b: 75%;
   }
 }
 
@@ -80,7 +99,7 @@ Body {
   animation: footerIntro 4s 8s forwards;
 }
 .Footer button::before {
-  z-index: -3;
+  z-index: -3 !important;
 }
 
 @keyframes footerIntro {
@@ -93,18 +112,22 @@ Body {
 }
 
 .Whale {
-  z-index: -2;
-  animation: whaleIntro 3s ease-in-out, whaleFloat 3s 1s alternate infinite;
+  z-index: -2 !important;
+  transform-origin: 69% 40%;
+  animation: whaleIntro 8s ease-in-out, whaleFloat 3s 1s alternate infinite;
 }
 @keyframes whaleIntro {
   0% {
     opacity: 0;
+    scale: 0;
   }
   20% {
     opacity: 0;
+    scale: 0;
   }
   100% {
     opacity: 1;
+    scale: 1;
   }
 }
 @keyframes whaleFloat {
@@ -131,7 +154,7 @@ button {
     rgba(99, 70, 103, 1) 0%,
     rgba(188, 131, 196, 1) 100%
   );
-  font-family: /* La Belle Aurore */ Kolker Brush;
+  font-family: Kolker Brush;
   font-size: 2em;
   color: bisque;
   text-shadow: 2px 2px 2px #2d262e;
