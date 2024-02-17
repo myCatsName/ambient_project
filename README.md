@@ -1,5 +1,7 @@
 ## Available Scripts
 
+Live demo: https://mycatsname.github.io/ambient_project/
+
 In the project directory, you can run:
 
 ### `npm start`

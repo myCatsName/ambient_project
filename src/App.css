@@ -19,13 +19,13 @@ Body {
 }
 
 @property --a {
-  syntax: "<percentage>";
-  inherits: false;
+  syntax: "<length-percentage>";
+  inherits: true;
   initial-value: 0%;
 }
 @property --b {
-  syntax: "<percentage>";
-  inherits: false;
+  syntax: "<length-percentage>";
+  inherits: true;
   initial-value: 0%;
 }
 
@@ -35,16 +35,9 @@ Body {
   background: radial-gradient(
     circle at 69%,
     #634667,
-    #333 50%,
-    #eee 75%,
-    #333 75%
-  );
-  background: radial-gradient(
-    circle at 69%,
-    #634667,
-    #333 var(--a),
-    #eee var(--b),
-    #333 var(--b)
+    #333 var(--a, 50%),
+    #eee var(--b, 75%),
+    #333 var(--b, 75%)
   );
   position: relative;
   display: flex;

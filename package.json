@@ -1,7 +1,7 @@
 {
   "name": "ambient_project",
-  "version": "0.2.9",
-  "homepage": ".",
+  "version": "0.2.9.2",
+  "homepage": "https://mycatsname.github.io/ambient_project/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
