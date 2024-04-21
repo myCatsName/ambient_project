@@ -13,105 +13,56 @@ import {
 
 import { ReactComponent as Emojione } from "./Assets/Emojione_BW_1F40B.svg";
 
-function handleDrone() {
-  document.querySelector(".Drone").classList.toggle("isPlaying");
-  let droneID = drone.seek();
-  drone.playing() ? drone.pause() : drone.seek(droneID, drone.play());
-}
-function handleWhale() {
-  const whaleID = whaleSound.seek();
-  whaleSound.playing()
-    ? whaleSound.pause()
-    : whaleSound.seek(whaleID, whaleSound.play());
-}
-function handleHeavyTrack() {
-  togglePlayingEffect(".MelodyA");
-  let heavyID = heavyTrack1.seek();
-  bTrack1.playing() && bTrack1.pause();
-  track2Base.playing() && track2Base.pause() && track2Melody.pause();
-  track3Base.playing() && track3Base.pause() && track3Melody.pause();
-  heavyTrack1.playing()
-    ? heavyTrack1.pause()
-    : heavyTrack1.seek(heavyID, heavyTrack1.play());
-}
-function handleBtrack() {
-  togglePlayingEffect(".MelodyB");
-  let bTrackID = bTrack1.seek();
-  heavyTrack1.playing() && heavyTrack1.pause();
-  track2Base.playing() && track2Base.pause() && track2Melody.pause();
-  track3Base.playing() && track3Base.pause() && track3Melody.pause();
-  bTrack1.playing() ? bTrack1.pause() : bTrack1.seek(bTrackID, bTrack1.play());
-}
-function handleBonus1() {
-  togglePlayingEffect(".BonusA");
-  if (track2Base.playing()) {
-    track2Base.pause();
-    track2Melody.pause();
-  } else {
-    bTrack1.stop();
-    heavyTrack1.stop();
-    track3Base.pause();
-    track3Melody.pause();
-    track2Base.play();
-    track2Melody.play();
-  }
-}
-function handleBonus2() {
-  togglePlayingEffect(".BonusB");
-  if (track3Base.playing()) {
-    track3Base.pause();
-    track3Melody.pause();
-  } else {
-    bTrack1.stop();
-    heavyTrack1.stop();
-    track2Base.stop();
-    track2Melody.stop();
-    track3Base.play();
-    track3Melody.play();
-  }
-}
+const tracks = {
+  whale: { track: [whaleSound], solo: false },
+  drone: { class: ".Drone", track: [drone], solo: false },
+  bTrack: { class: ".MelodyB", track: [bTrack1], solo: true },
+  aTrack: { class: ".MelodyA", track: [heavyTrack1], solo: true },
+  track2: { class: ".BonusA", track: [track2Base, track2Melody], solo: true },
+  track3: { class: ".BonusB", track: [track3Base, track3Melody], solo: true },
+};
 
-function togglePlayingEffect(id) {
-  const ting = document.querySelector(id);
-  const btnClass = [".MelodyA", ".MelodyB", ".BonusA", ".BonusB"];
+const currentMainTrack = [];
 
-  if (ting.classList.contains("isPlaying")) ting.classList.remove("isPlaying");
-  else {
-    btnClass
-      .filter((btn) =>
-        document.querySelector(btn).classList.contains("isPlaying")
-      )
-      .forEach((btn) =>
-        document.querySelector(btn).classList.remove("isPlaying")
-      );
-
-    ting.classList.add("isPlaying");
+const handleChange = (track) => {
+  const target = tracks[track];
+  const timeStamp = target.track[0].seek();
+  target.track.forEach((track) =>
+    track.playing() ? track.pause() : track.seek(timeStamp, track.play())
+  );
+  document.querySelector(target.class)?.classList.toggle("isPlaying");
+  if (currentMainTrack !== target && target.solo) {
+    currentMainTrack.track?.forEach((track) => track.pause());
+    document
+      .querySelector(currentMainTrack.class)
+      ?.classList.remove("isPlaying");
+    currentMainTrack = target;
   }
-}
+};
 
 function App() {
   return (
     <div className="App">
       <div className="ButtonGroup1">
-        <button className="Drone" onClick={handleDrone}>
+        <button className="Drone" onClick={() => handleChange("drone")}>
           Drone
         </button>
         <>
-          <button className="MelodyA" onClick={handleHeavyTrack}>
+          <button className="MelodyA" onClick={() => handleChange(`aTrack`)}>
             Melody A
           </button>
-          <button className="MelodyB" onClick={handleBtrack}>
+          <button className="MelodyB" onClick={() => handleChange(`bTrack`)}>
             Melody B
           </button>
         </>
       </div>
-      <Emojione className="Whale" onClick={handleWhale} />
+      <Emojione className="Whale" onClick={() => handleChange(`whale`)} />
       <button className="QuestionMark">?</button>
       <footer className="Footer">
-        <button className="BonusA" onClick={handleBonus1}>
+        <button className="BonusA" onClick={() => handleChange(`track2`)}>
           Bonus A
         </button>
-        <button className="BonusB" onClick={handleBonus2}>
+        <button className="BonusB" onClick={() => handleChange(`track3`)}>
           Bonus B
         </button>
       </footer>
