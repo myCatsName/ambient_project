@@ -13,56 +13,56 @@ import {
 
 import { ReactComponent as Emojione } from "./Assets/Emojione_BW_1F40B.svg";
 
-const tracks = {
-  whale: { track: [whaleSound], solo: false },
-  drone: { class: ".Drone", track: [drone], solo: false },
-  bTrack: { class: ".MelodyB", track: [bTrack1], solo: true },
-  aTrack: { class: ".MelodyA", track: [heavyTrack1], solo: true },
-  track2: { class: ".BonusA", track: [track2Base, track2Melody], solo: true },
-  track3: { class: ".BonusB", track: [track3Base, track3Melody], solo: true },
+const trackDetails = {
+  whale: { src: [whaleSound], solo: false },
+  drone: { class: ".Drone", src: [drone], solo: false },
+  bTrack: { class: ".MelodyB", src: [bTrack1], solo: true },
+  aTrack: { class: ".MelodyA", src: [heavyTrack1], solo: true },
+  track2: { class: ".BonusA", src: [track2Base, track2Melody], solo: true },
+  track3: { class: ".BonusB", src: [track3Base, track3Melody], solo: true },
 };
 
-const currentMainTrack = [];
+let currentMainTrack = [];
 
-const handleChange = (track) => {
-  const target = tracks[track];
-  const timeStamp = target.track[0].seek();
-  target.track.forEach((track) =>
-    track.playing() ? track.pause() : track.seek(timeStamp, track.play())
-  );
-  document.querySelector(target.class)?.classList.toggle("isPlaying");
-  if (currentMainTrack !== target && target.solo) {
-    currentMainTrack.track?.forEach((track) => track.pause());
+const toggleTrack = (selection) => {
+  const selectedTrack = trackDetails[selection];
+  if (selectedTrack.solo && currentMainTrack !== selectedTrack) {
+    currentMainTrack.src?.forEach((track) => track.pause());
     document
       .querySelector(currentMainTrack.class)
       ?.classList.remove("isPlaying");
-    currentMainTrack = target;
+    currentMainTrack = selectedTrack;
   }
+  const timeStamp = selectedTrack.src[0].seek();
+  selectedTrack.src.forEach((track) =>
+    track.playing() ? track.pause() : track.seek(timeStamp, track.play())
+  );
+  document.querySelector(selectedTrack.class)?.classList.toggle("isPlaying");
 };
 
 function App() {
   return (
     <div className="App">
       <div className="ButtonGroup1">
-        <button className="Drone" onClick={() => handleChange("drone")}>
+        <button className="Drone" onClick={() => toggleTrack("drone")}>
           Drone
         </button>
         <>
-          <button className="MelodyA" onClick={() => handleChange(`aTrack`)}>
+          <button className="MelodyA" onClick={() => toggleTrack(`aTrack`)}>
             Melody A
           </button>
-          <button className="MelodyB" onClick={() => handleChange(`bTrack`)}>
+          <button className="MelodyB" onClick={() => toggleTrack(`bTrack`)}>
             Melody B
           </button>
         </>
       </div>
-      <Emojione className="Whale" onClick={() => handleChange(`whale`)} />
+      <Emojione className="Whale" onClick={() => toggleTrack(`whale`)} />
       <button className="QuestionMark">?</button>
       <footer className="Footer">
-        <button className="BonusA" onClick={() => handleChange(`track2`)}>
+        <button className="BonusA" onClick={() => toggleTrack(`track2`)}>
           Bonus A
         </button>
-        <button className="BonusB" onClick={() => handleChange(`track3`)}>
+        <button className="BonusB" onClick={() => toggleTrack(`track3`)}>
           Bonus B
         </button>
       </footer>
