@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ambient_project/static/css/main.7cc78ff6.css",
-    "main.js": "/ambient_project/static/js/main.d263b0c3.js",
+    "main.js": "/ambient_project/static/js/main.382cdeb1.js",
     "static/media/Track2melody.mp3": "/ambient_project/static/media/Track2melody.794df4909625d31b0691.mp3",
     "static/media/Heavy-melody.mp3": "/ambient_project/static/media/Heavy-melody.2bf9508af39909987a65.mp3",
     "static/media/B-melody.mp3": "/ambient_project/static/media/B-melody.bda786407eb312e09ac9.mp3",
@@ -13,10 +13,10 @@
     "static/media/Emojione_BW_1F40B.svg": "/ambient_project/static/media/Emojione_BW_1F40B.77748aead859cbc15f0a62652923d433.svg",
     "index.html": "/ambient_project/index.html",
     "main.7cc78ff6.css.map": "/ambient_project/static/css/main.7cc78ff6.css.map",
-    "main.d263b0c3.js.map": "/ambient_project/static/js/main.d263b0c3.js.map"
+    "main.382cdeb1.js.map": "/ambient_project/static/js/main.382cdeb1.js.map"
   },
   "entrypoints": [
     "static/css/main.7cc78ff6.css",
-    "static/js/main.d263b0c3.js"
+    "static/js/main.382cdeb1.js"
   ]
 }
